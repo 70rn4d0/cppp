@@ -2,6 +2,52 @@
 #include "PhoneBook.hpp"
 
 
+int add(PhoneBook *phonebook, int index)
+{
+    return phonebook->contacts[index].set_data();
+}
+
+int search(PhoneBook phonebook)
+{
+    int i = 0;
+    int index = 0;
+
+
+    std::string output;
+    std::cout << "---------------------------------------------\n";
+    std::cout << "|     index|first name| last name|  nickname|\n";
+    std::cout << "---------------------------------------------\n";
+    while (i < 8)
+    {
+        phonebook.contacts[i].put_data(i);
+        i++;
+    }
+    while (1)
+    {
+        std::cout << "Enter index :";
+        std::cin >> index;
+        if (std::cin.eof())
+            return 1;
+        if(std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cout << "Error: Not a number\n";
+        }
+        else
+        {
+            std::cin.ignore(1000, '\n');
+            break;
+        }
+    }
+    if (index >= 8)
+        std::cout << "None\n";
+    else
+        phonebook.contacts[index].put_all_data();
+    return 0;
+}
+
+
 int main(void)
 {
     std::string input;
